@@ -1,3 +1,15 @@
 应用号介绍总网址：http://gold.xitu.io/post/57e484f875c4cd2d9f345f8a
 应用号开发文档	http://wxopen.notedown.cn/devtools/edit.html
 weui  			https://weui.io/
+
+爱范儿的文章		http://www.ifanr.com/720976
+github上			https://github.com/justjavac/awesome-wechat-weapp#%E6%96%87%E7%AB%A0
+
+
+labrador让微信小程序支持模块化，支持npm
+https://segmentfault.com/a/1190000007109050
+
+
+
+
+
