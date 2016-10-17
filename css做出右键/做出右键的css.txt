@@ -1,0 +1,9 @@
+	width: 10px;
+	height: 10px;
+	border-top: 2px solid #999;
+	border-right: 2px solid #999;
+  /*float: right;*/
+  position: absolute;
+  right: 20px;
+  transform: rotate(45deg);
+  top: 20px;
