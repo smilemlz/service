@@ -1,0 +1,5 @@
+网易博客有三种，socket,curl,httpclient
+http://3699119.blog.163.com/blog/static/1670753512010717102250859/
+
+博客园两种，curl,fsocket 较为详细
+http://www.cnblogs.com/simpman/p/3549816.html
