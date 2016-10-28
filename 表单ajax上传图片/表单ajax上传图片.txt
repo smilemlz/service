@@ -1,0 +1,203 @@
+//本例子是火云促销中的编辑中的上传图片
+
+
+//在edit.html中
+	<input type="text" name="img" id="J_img" class="input-text fl mr10" size="30" value="{$info.img}">
+    <div id="J_upload_img" class="upload_btn"><span>{:L('upload')}</span></div> 
+	
+	<script src="__STATIC__/js/fileuploader.js"></script>
+	<script>
+		//设置1s的定时器
+setInterval(function(){
+      var img=$("#J_img").val();
+	  if(img==""){
+	     $("#headimg").remove();
+	  }else{
+	     var imgurl=img;
+		 if($("#headimg").length==1){
+		      //不进行任何操作
+		 }else{
+		     $("#spheadimg").append('<img style="width:25px;height:25px" id="headimg" src="{$info.img}" />');
+		 }
+         $("#headimg").attr("src",imgurl);
+	  }
+},1);
+
+$(function(){
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+	function complate(result){
+		if(result.status == 1){
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+		} else {
+			$.pinphp.tip({content:result.msg, icon:'alert'});
+		}
+	}
+	
+	//上传图片
+    var uploader = new qq.FileUploaderBasic({
+    	allowedExtensions: ['jpg','gif','jpeg','png','bmp','pdg'],
+        button: document.getElementById('J_upload_img'),
+        multiple: false,
+        action: "{:U('User/ajax_upload_imgs',array('user_id'=>$info['id']))}",
+        inputName: 'img',
+        forceMultipart: true, 		//用$_FILES
+        messages: {
+        	typeError: lang.upload_type_error,
+        	sizeError: lang.upload_size_error,
+        	minSizeError: lang.upload_minsize_error,
+        	emptyError: lang.upload_empty_error,
+        	noFilesError: lang.upload_nofile_error,
+        	onLeave: lang.upload_onLeave
+        },
+        showMessage: function(message){
+        	$.pinphp.tip({content:message, icon:'error'});
+        },
+        onSubmit: function(id, fileName){
+        	$('#J_upload_img').addClass('btn_disabled').find('span').text(lang.uploading);
+        },
+        onComplete: function(id, fileName, result){
+        	$('#J_upload_img').removeClass('btn_disabled').find('span').text(lang.upload);
+            if(result.status == '1'){
+        		$('#J_img').val(result.data);
+        	} else {
+        		$.pinphp.tip({content:result.msg, icon:'error'});
+        	}
+        }
+    });
+});
+	</script>
+
+
+	//UserController.class.php中
+	
+	
+	public function ajax_upload_imgs() {
+        //上传图片
+        if (!empty($_FILES['img']['name'])) {
+            $result = $this->_upload($_FILES['img'], 'User' );
+            if ($result['error']) {
+                $this->error($result['info']);
+            }else {
+				$data['img'] =  $result['info']['savepath'].$result['info']['savename'];
+                $this->ajaxReturn(1, L('operation_success'), $data['img']);
+            }
+
+
+        } else {
+            $this->ajaxReturn(0, L('illegal_parameters'));
+        }
+    }
+	
+	//BaseController.class.php中
+	
+		/**
+     * 上传文件默认规则定义
+     */
+    protected function _upload_init($upload) {
+    	
+        $allow_max = C('attr_allow_size'); //读取大小配置
+        $allow_exts = explode(',', C('attr_allow_exts')); //读取类型配置
+        $allow_max && $upload->maxSize = $allow_max * 1024;   //文件大小限制
+        $allow_exts && $upload->exts = $allow_exts;  //文件后缀限制
+        return $upload;
+       
+    }
+    /**
+     * 上传文件
+     */
+	 protected function _upload($file, $dir = '' , $type='image') {
+        $upload = new Upload();
+        //$upload->rootPath='./data/upload';
+        if ($dir) {
+            $upload_path =  $dir . '/';
+            $upload->savePath = $upload_path;
+        }
+        //自定义上传规则
+        $upload = $this->_upload_init($upload);
+		if($type=='image'){
+			$upload->exts = array('jpg','gif','png','jpeg');// 设置图片上传后缀;
+		}
+        if ($result = $upload->uploadOne($file)) {
+			if($_SESSION['admin_user']){
+				$username=$_SESSION['admin']['username'];
+			}else{
+				$username=$_SESSION['user']['username'];
+			}
+			$db=array(
+				'flag'=>'image',
+				'admin_id'=>$_SESSION['admin_user'],
+				'username'=>$username,
+				'type'=>$result['ext'],
+				'size'=>$result['size'],
+				'file_name'=>$result['savepath'].$result['savename'],
+				'module_name'=>CONTROLLER_NAME.'/'.ACTION_NAME,
+			);
+			$this->_upload_field($db);
+			$result['savepath']='/data/upload/'.$result['savepath'];
+            return array('error'=>0, 'info'=>$result);
+        } else {
+            return array('error'=>1, 'info'=>$upload->getError());
+        }
+       
+    }
+	
+	
+	
+    /*
+     * 附件上传文件记录
+     * 
+     */
+    protected function _upload_field($data){
+    	$Model = D('upload');
+    	$data['admin_id'] = $data['admin_id'] ? $data['admin_id'] : 0;
+    	$data['add_time'] = $data['add_time'] ? $data['add_time'] : time();
+    	$data['add_ip'] = $data['add_ip'] ? $data['add_ip'] : get_client_ip();
+    	$result = $Model->add($data);
+    	if($result){
+    		return $result;
+    	}else{
+    		return false;
+    	}
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
