@@ -1,0 +1,7 @@
+处理gif倒序播放
+http://mp.weixin.qq.com/s?__biz=MzI0NjIxMzE5OQ==&mid=2656697923&idx=1&sn=9616bf93fa11aa1b4b667a113f306179&chksm=f2efe163c59868758044be3b3bc1a868594f110e3e079bf7b59195b36d98d15f6577bf334b37#rd
+
+
+
+豆瓣每日书单并生成markdown
+http://www.jianshu.com/p/3ac289a5d43e
