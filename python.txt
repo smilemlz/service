@@ -5,3 +5,7 @@ http://mp.weixin.qq.com/s?__biz=MzI0NjIxMzE5OQ==&mid=2656697923&idx=1&sn=9616bf9
 
 豆瓣每日书单并生成markdown
 http://www.jianshu.com/p/3ac289a5d43e
+
+
+flask 10天搭一个网站
+http://www.jianshu.com/p/1278c7ee0cc7
