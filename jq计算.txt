@@ -114,7 +114,7 @@
 			//alert(money);
 			var num = $(".selectnumber").val();
 			//alert(num);
-			var sum = money*num;
+			var sum = (money*num).toFixed(2);
 			$(".footleft").text(sum);
 		}
 		
