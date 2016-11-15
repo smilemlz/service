@@ -1,0 +1,127 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>发布活动</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script type="text/javascript" src="http://static.ydbimg.com/API/YdbOpen.js"></script>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/jquery.datetimepicker.full.js"></script>
+<link href="css/huosu.css" type="text/css" rel="stylesheet" />
+<link href="css/jquery.datetimepicker.css" type="text/css" rel="stylesheet" />
+</head>
+<body style="background:#f0f0f0;">
+<div class="header"> <img src="./image/headerimg.png"> <span>发布活动</span> </div>
+<div class="activitytype">
+  <ul class="Menuboxtype">
+    <li id="type1" value="开业大典" class="hover" >开业大典</li>
+    <li id="type2" value="商务会议" >商务会议</li>
+    <li id="type3" value="汽车展览" >汽车展览</li>
+    <li id="type4" value="发布会" >发布会</li>
+    <li id="type5" value="产品代言" >产品代言</li>
+    <li id="type6" value="聚会派对">聚会派对</li>
+    <li id="type7" value="旅游活动" >旅游活动</li>
+    <li id="type8" value="艺术拍摄" >艺术拍摄</li>
+  </ul>
+</div>
+<div class="describe">
+  <h2>活动描述</h2>
+  <textarea class="describetext"></textarea>
+</div>
+<div class="activitytype2">
+  <h2>模特类型</h2>
+  <ul class="Menuboxtyper typeif">
+    <li id="typew1" value="200" class="hover" >超模</li>
+    <li id="typew2" value="100" >礼仪</li>
+    <li id="typew3" value="150" >模特</li>
+  </ul>
+</div>
+<div class="activitytype2">
+  <h2>标签</h2>
+  <ul class="Menuboxtyped typeif">
+    <li id="typeq1" class="hover" >活泼</li>
+    <li id="typeq2">善言</li>
+    <li id="typeq3" >双胞胎</li>
+  </ul>
+</div>
+<div class="number">
+ <h2><img src="./image/moreuser.png"><p>所需人数</p></h2>
+
+ <select name="wea" class="selectnumber">
+  <option value="1" selected="selected">1人</option>
+  <option value="2" >2人</option>
+  <option value="3" >3人</option>
+  <option value="4" >4人</option>
+  <option value="5" >5人</option>
+  <option value="10" >10人</option>
+  <option value="50" >50人</option>
+  <option value="100" >100人</option>
+ </select>
+</div>
+
+<div class="worktime">
+ <h2><img src="./image/timeimg.png"><p>工作时间</p></h2>
+ <div class="timeselect">
+  <!--div class="starttime ourstyle some_class"></div-->
+  <input type="datetime-local" value="开始时间" class="starttime ourstyle ">
+  <p>至</p>
+  <!--div class="endtime ourstyle some_class">结束时间</div-->
+   <input type="datetime-local" value="结束时间" class="endtime ourstyle ">
+ </div>
+</div>
+
+<div class="addmoney">
+ <h2><img src="./image/moneyimg.png"><p>每人追加金额</p></h2>
+ <input type="text" placeholder="请输入追加金额">
+ <h2><p>元</p></h2>
+</div>
+
+<div class="footer">
+ <p>费用<span class="footleft">200.00</span>元</p>
+ <a href="#">去支付</a>
+</div>
+
+
+<script type="text/javascript">
+
+ $(function(){
+ 		//var num = 1;var money = 200;
+		$('.Menuboxtype li').click(function(){
+			$(this).addClass("hover");
+			$(this).siblings().removeClass("hover");
+			
+		})
+		$('.Menuboxtyper li').click(function(){
+			$(this).addClass("hover");
+			$(this).siblings().removeClass("hover");
+			sum();
+		})
+		$('.Menuboxtyped li').click(function(){
+			$(this).toggleClass("hover");
+		})
+
+		$(".selectnumber").change(function(){
+			sum();
+		})
+		
+		function sum(){
+			var money = $(".Menuboxtyper").find('li[class*=hover]').val();
+			//alert(money);
+			var num = $(".selectnumber").val();
+			//alert(num);
+			var sum = money*num;
+			$(".footleft").text(sum);
+		}
+		
+
+
+ })
+ </script>
+
+</body>
+</html>
