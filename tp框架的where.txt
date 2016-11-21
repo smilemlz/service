@@ -1,0 +1,4 @@
+$where['lon'] = array('between',"$maxLng,$minLng");
+		$where['lat'] = array('between',"$minLat,$maxLat");
+		$result = M('store')->where($where)->select();
+					
