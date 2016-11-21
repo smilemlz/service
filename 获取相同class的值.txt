@@ -1,0 +1,8 @@
+var mm = $('.Menuboxtyped .hover');
+var len = mm.length;
+if(!len){alert('请选择标签');return;};			//相同class的个数
+mm.each(function(){
+	var m = $(this);
+	//alert(m.val());
+	markarr += m.val()+',';						//获取单个的值
+})
