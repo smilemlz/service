@@ -9,3 +9,10 @@ http://www.jianshu.com/p/3ac289a5d43e
 
 flask 10天搭一个网站
 http://www.jianshu.com/p/1278c7ee0cc7
+
+
+python,ruby,javascript的比较
+http://liujiacai.net/blog/2016/03/26/python-ruby-javascript/
+
+python试题(听说你会python)
+http://manjusaka.itscoder.com/2016/11/18/Someone-tell-me-that-you-think-Python-is-simple/
