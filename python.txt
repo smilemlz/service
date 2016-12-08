@@ -20,3 +20,10 @@ http://manjusaka.itscoder.com/2016/11/18/Someone-tell-me-that-you-think-Python-i
 
 序列操作进阶
 http://zmrenwu.com/post/4/2016/11/28/python-xu-lie-cao-zuo-jin-jie/
+
+
+豆瓣电影
+https://zhuanlan.zhihu.com/p/24035574
+
+网络爬虫
+https://zhuanlan.zhihu.com/p/22390905
