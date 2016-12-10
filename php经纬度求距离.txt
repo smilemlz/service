@@ -36,3 +36,8 @@ $calculatedDistance = $earthRadius * $stepTwo;
  
 return round($calculatedDistance); 
 } 
+
+
+
+内有经纬度求距离还有根据中心点，距离求范围内的点
+https://segmentfault.com/q/1010000000338140
