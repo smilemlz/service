@@ -1,0 +1,12 @@
+nginx实战
+http://blog.720ui.com/2016/nginx_action_all/
+
+
+nginx负载均衡
+https://taozj.org/201612/nginx-load-balancing.html
+
+
+
+
+
+
