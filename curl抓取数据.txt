@@ -1,0 +1,38 @@
+
+##抓取数据
+function post_data($url, $data,$status=0)
+{
+	$curl = curl_init();
+	//php5.5跟php5.6中的CURLOPT_SAFE_UPLOAD的默认值不同
+	if (class_exists ( '/CURLFile' )) { 			
+		curl_setopt ( $curl, CURLOPT_SAFE_UPLOAD, true ); 		
+	}else{ 			
+		if (defined ( 'CURLOPT_SAFE_UPLOAD' )) { 				
+			curl_setopt ( $curl, CURLOPT_SAFE_UPLOAD, false ); 			
+		}
+	}
+	
+	curl_setopt($curl, CURLOPT_URL, $url);
+	
+	if($status==1){
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, TRUE); // 只信任CA颁布的证书
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2); // 检查证书中是否设置域名，并且是否与提供的主机名匹
+		//需要证书校验 /data/cert/
+		curl_setopt($curl,CURLOPT_SSLCERTTYPE,'PEM');
+		curl_setopt($curl,CURLOPT_SSLCERT,getcwd().'/_core/Library/Vendor/Wxpay/jsapi/cert/apiclient_cert.pem');
+		curl_setopt($curl,CURLOPT_SSLKEYTYPE,'PEM');
+		curl_setopt($curl,CURLOPT_SSLKEY,getcwd().'/_core/Library/Vendor/Wxpay/jsapi/cert/apiclient_key.pem');
+		curl_setopt($curl, CURLOPT_CAINFO,getcwd().'/_core/Library/Vendor/Wxpay/jsapi/cert/rootca.pem'); // CA根证书（用来验证的网站证书是否是CA颁布）
+	}else{
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+	}
+	if (!empty($data)){
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+	}
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	$output = curl_exec($curl);
+	curl_close($curl);
+	return $output;
+}
